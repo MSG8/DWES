@@ -1,0 +1,56 @@
+body
+{
+  text-align: center;
+  font-size: 1.4em;
+  background-color: green;
+}
+
+section
+{
+  margin: 20px;
+  padding: 10px;
+  border-radius: 15px;
+  border: 8px orange groove;
+  background-color: #FFBF6E;
+}
+
+form
+{
+  display:inline-block;
+  border-radius: 20px;
+  border: 5px orange double;
+  width: 690px;
+  padding: 10px;
+  background-color: #FFE6B3;
+}
+
+input
+{
+  margin-left: 150px;
+}
+
+button
+{
+  margin-left: 50px;
+  border: 3px outset #005FFB;
+  background-color: #5C98F9;
+  color: white;
+}
+
+button:hover
+{
+  border: 3px inset #005FFB;
+  background-color: white;
+  color: #5C98F9;
+  transition-duration: 0.4s;
+}
+
+a
+{
+  text-align: center;
+}
+
+input[type="button"] /* No funciona*/
+{
+  margin-left: 0px;
+}

@@ -1,0 +1,58 @@
+/* Este css es un css que se aplica en todos los archivos html */
+/* Colocamos el color de las letras del todo el documento, el tipo de letra y como se organiza */
+body
+{
+	color: white;
+	font-family: Verdana;
+	text-align: justify;
+}
+
+/* Colocamos el color y tamaño del pie y la cabeza */
+header, footer
+{
+	background-color: black;
+	height: 6em;
+}
+
+/* colocamos la imagen al lado izquierdo y el tamaño para que no salga del header */
+header img
+{
+	height: 60%;
+	float: left;
+}
+
+/* Colocamos el titulo en su sitio y a los valores buscados, uso el line-height para centrarlo */
+h1
+{
+	font-family: Fantasy;
+	text-align: center;
+	margin: 0;
+	line-height: 2em;
+	padding: 1em 2em 0 0;
+}
+
+/* colocamos la imagen al lado derecho y el tamaño para que no salga del footer */
+footer img
+{
+	height: 60%;
+	float: right;
+}
+
+/* Cambiamos los valores basicos de los enlances para que no sea tan repetitivo */
+a 
+{
+	padding:0 10%;
+	line-height: 5em;
+	color: white;
+	text-align: center;
+	margin: 0;
+	font-size: 1.5em;
+	text-decoration: none;
+	font-family: Arial;
+	font-weight: bold;
+}
+
+a:hover
+{
+	color: orange;
+}

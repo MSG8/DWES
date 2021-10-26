@@ -1,0 +1,40 @@
+/* Estilo usado solo para el formulario */
+body
+{
+	background-image: URL("imagenes/fondo.jpg");
+}
+
+form
+{
+	background-color: #FB856B;
+	border: black 3px solid;
+	margin: 5%;
+	font-size: large;
+}
+
+input, label
+{
+	display: block;
+}
+
+label
+{
+	margin: 2em 0em 0.5em 0em ;
+}
+
+legend
+{
+	font-size: xx-large;
+	text-height: bold;
+	font-family: Fantasy;
+}
+
+button
+{
+	margin: 0.5em;
+	padding: 1em 2em;
+	font-size: xx-large;
+	text-height: bold;
+	font-family: Fantasy;
+	background-color: white;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- Manuel Solís Gómez -->
+<HTML>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta type="author" content="Manuel Solis Gomez"/>
+		<meta type="description" content="Pagina de formulario de la pagina web"/>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title> Formulario de Opinion </title>
+		<link rel="stylesheet" type="text/css" href="estilo.css">
+		<link rel="stylesheet" type="text/css" href="estilo2.css">
+	</head>
+	<body>
+		<header>
+			<img src="imagenes/logo.png" />
+			<h1> LAS MUJERES EN LA HISTORIA DE LA INFORMATICA</h1>
+		</header>
+		<form action="recoger.php" method="post"> <!--<form action="recoger2.php" method="get">-->
+			<fieldset>
+				<legend>Datos personales</legend>
+				<label  for="nombre">Nombre completo y apellidos del solicitante (tal y como aparecen en el DNI):</label>
+				<input type="text" name="nombre" placeholder="Nombre" maxlength="30" />
+				<input type="text" name="apellidos" placeholder="Apellidos" maxlength="60" />
+				<input type="text" name="dni" placeholder="DNI" size="9" maxlength="9" pattern="[0-9]{8}[a-zA-Z]{1}" title="8 digitos y 1 letra" />
+				<label  for="fecha">Selecciona la fecha y la hora en la que nacio.</label>
+				<input type="datetime-local" name="fecha" min="now()" max="2021-12-31" />
+				<label  for="edad">Diga su edad.</label>
+				<input type="number" name="edad" value="no dicho" />
+				<label  for="check">Usted es:</label>
+				<input type="radio" name="check" class="eleccion" value="Estudiante" /> Estudiante
+				<input type="radio" name="check" class="eleccion" value="Profesor"/> Profesor
+			</fieldset>
+			<fieldset>
+				<legend>Datos de la Opinion</legend>
+				<label  for="mujeres">¿Cual es su favorita?</label>
+				<select name="mujeres" >
+					<option value="" selected="selected" hidden="hidden">--Seleccione un nombre--</option>
+					<option value="Margaret Hamilton"  >--Margaret Hamilton--</option>
+					<option value="Lynn Conway"  >--Lynn Conway--</option>
+					<option value="Grace Murray Hopper"  >--Grace Murray Hopper--</option>
+				</select>
+				<label for="cuadrotexto">¿Que opina sobre la informacion?</label>
+				<textarea name="cuadrotexto" rows="10" wrap="hard" required="required"></textarea>
+			</fieldset>
+			<fieldset>
+				<legend>Contacto</legend>
+				<label for="correo">Correo electrónico de contacto o número de teléfono para confirmar la consulta.</label>
+				<input type="email" name="correo" placeholder="ejemplo@gmail.com" /> <!-- required="required" -->
+			</fieldset>
+			<!--Borrar-->
+			<button type="reset" name="borrar" value="Borrar" >Borrar</button>
+			<!--Enviar-->
+			<button type="submit" name="enviar" >Enviar</button>
+		</form>
+		<footer>
+			<a href="tabla.html">Resumen</a>
+			<a href="index.html">Inicio</a>
+			<a href="mailto:masogo008@gmail.com">Correo</a>
+			<img src="imagenes/logo.png" />
+		</footer>
+	</body>
+</HTML>
