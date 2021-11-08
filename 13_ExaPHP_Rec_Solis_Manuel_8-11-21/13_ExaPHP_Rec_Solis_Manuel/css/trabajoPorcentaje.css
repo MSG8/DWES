@@ -1,0 +1,124 @@
+/*
+    Manuel Solis Gomez
+    Licencia: Libre
+    Este archivo aplica los estilos layout y estilo general de la pagina, se aplica en porcentaje
+*/
+* /*reseteamos todos los valores por defecto de los navegadores para que no interfieran en nuestro layaout*/
+{
+    padding: 0;
+    margin: 0;
+    border: 0;
+} 
+body
+{
+    width: 83.3333%; /* Con este porcentaje se aplica para pasar los 1200px en referencia a los 1440 del html */
+    margin: 0 auto; /* Asi centrarmos el contenido, el margen se colocara igual en ambos lados */
+    font-size: 16px; /* Se pone el tamaño que usaremos para medidas rem o em */
+}
+body header,body footer
+{
+    height: 9.38rem; /*Segun su font-size:16px se aplicara 150px*/
+}
+body nav
+{
+    height: 6.25rem; /*Segun su font-size:16px se aplicara 100px*/
+}
+body main
+{
+    overflow: hidden; /* Asi aplicas el alto del mismo tamaño que su contenido mas alto */
+}
+body main nav
+{
+    min-height: 9.38rem; /* Asi colocamos un minimo de alto por si no contiene nada, segun su font-size:16px se aplicara 150px */
+    padding-left: 2.5%; /*Separamos algo el contenido del borde, segun el porcentaje sera 30px */
+    width: 30.83%; /*Aplico un ancho, segun el porcentaje sera 370px */
+    float: left; /*Floto la caja a la izquierda para que se coloque una al lado de otra aunque seaa un bloque*/
+    height: auto; /*Hago que el alto sea automatico*/
+}
+body main article
+{
+    min-height: 34.38rem; /* Asi colocamos un minimo de alto por si no contiene nada, cambiada por motivos esteticos, segun su font-size:16px se aplicara 550px */
+    padding: 0 2.5%; /*Separamos algo el contenido del borde, eliminado ya que se centra solo*/
+    width: 61.67%; /*Aplico un ancho, segun el porcentaje sera 740px */
+    float: left; /*Floto la caja a la izquierda para que se coloque una al lado de otra aunque seaa un bloque*/
+    height: auto; /*Hago que el alto sea automatico*/
+}
+html
+{
+    background-color: #3f3e3c;
+}
+body header
+{
+    background-color: coral;
+}
+body nav
+{
+    background-color: #ee3a3a;
+}
+body footer
+{
+    background-color: #94e1df;
+}
+body main
+{
+    background-color: #c07a2e;
+}
+body main nav
+{
+    background-color: cornsilk;
+}
+body main article
+{
+    background-color: #80d130;
+}
+body main nav a
+{
+    display:block;
+    padding: 2.25rem 9.73%; /*Aplicamos un espacio en el interior del a para que se vea mas grande, segun el porcentaje y el rem se correspondera a 36px*/
+    font-size: large;
+    text-decoration: none;
+    font-weight: bold;
+    color: #232323;
+    text-align: center;
+    height: auto;
+    line-height: normal;
+}
+body main nav a:hover
+{
+    background-color: #624a23; /*Aplicamos un cambio visual para dar mas estilo a la pagina y mostrar que hay un enlace*/
+    color: #ec9e21;
+}
+body main article
+{
+    background-image: url("https://comunidad.iebschool.com/iebs/files/2015/04/employer-branding.png");
+    background-size: 100%; /*Usado para poner la imagen en toda la pantalla*/
+}
+ul
+{
+    list-style-type: none;
+}
+#aviso p
+{
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+    color: red;
+    margin-bottom: 1em; /*Separamos 16 px la parte inferior*/
+}
+#aviso, #info
+{
+    padding: 1.25rem 0; /*Separamos la parte superior e inferior 20px*/
+    margin: 1.25rem auto; /*Centramos el elemento,separamos la parte superior e inferior 20px */
+    background-color: cornsilk;
+    text-align: center;
+    border:none;
+    opacity: 0.9;
+}
+#info p
+{
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+    color: green;
+    margin-bottom: 1em; /*Separamos 16 px la parte inferior*/
+}

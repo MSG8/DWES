@@ -1,0 +1,78 @@
+/*
+    Manuel Solis Gomez
+    Licencia: Libre
+    Este archivo se aplica en todos los archivps php que aplique formulario, con medidas de porcentaje
+*/
+body main section form
+{
+    width: 75.68%; /*Colocamos el ancho deseado,pasando de porcentaje a px sera 560px sumado a su padding dara 600 y con su borde sera 610px, el ancho total que queremos. No quitaremos un % de borde ya que no nos molestara en el layout*/
+    margin: 1.25rem auto; /*Centramos el elemento y lo separamos del borde superior e inferior del main, pasado a px seran 20px*/
+    padding: 1.25rem 2.70%; /*Hacemos que no se encuentre pegado al borde los elementos, sumando 40 px a su ancho total, 20px por cada lado*/
+    border: darkslategrey outset 5px; /*Añadimos el borde deseado, se sumara 10px mas a su ancho total*/
+}
+body main section form h2
+{
+    margin-bottom: 1.88rem; /*Separamos el titulo del los otros elementos del formulario, en px sera 30px*/
+} 
+body main section form div
+{
+    overflow: hidden; /* Usado para tomar el alto automatico de los elementos flotados contemidos mas alto */
+}
+body main section form div input
+{
+    width: 72.14%; /*Colocamos el ancho deseado, si lo colocamos en px sera 404px ,si se suma el padding sera un ancho total de 420px que es el ancho del boceto */
+    float: left; /*Flotamos los elementos para colocarlos de forma lineal */
+    margin-bottom: 1rem; /*Separamos los input uno del otro, passado a px sera 16px */
+    text-align: right; /* Colocamos el texto alineado a la derecha*/
+    padding: 1rem 2.86% 1rem 0; /* Colocamos un padding, pasado a px y % sera 16px, este sumara 16px mas al ancho total*/
+}
+body main section form div label
+{
+    width: 22.14%; /*Colocamos el ancho deseado en px sera 124px, si se suma el padding sera un ancho total de 140px que es el ancho de nuestro boceto */
+    float: left; /*Flotamos los elementos para colocarlos de forma lineal */
+    margin-bottom: 1rem; /*Separamos los label uno del otro, con 16px */
+    text-align: left; /* Colocamos el texto alineado a la izquierda*/
+    padding: 1rem 0 1rem 2.86%; /* Colocamos un padding, pasado a px y % sera 16px, este sumara 16px mas al ancho total*/
+}
+body main section form
+{
+    text-align: center; /*Centramos los elementos dentro del formulario, como los botones*/
+    background-color: rgb(200, 182, 121);
+    opacity: 0.9; /*Añadimos opacidad al formulario*/
+    border-radius: 20px;
+}
+body main section form div label
+{
+    font-weight: bold;
+    text-shadow: 5px 5px 5px #232323; /* Le colocamos una sombra a las letras de los label*/
+    border-radius: 30px;
+}
+body main section form div input
+{
+    border-radius: 20px;
+}
+input[type="submit"], input[type="button"]
+{
+    min-width: 17.86%; /* Ponemos un ancho minimo, si lo escrito en el boton es mayor que el ancho minimo, cambia, en px sera 100px*/
+    padding: 1.07%; /*Colocamos un padding que aumentara 12px el ancho total, en px sera 6px por cada lado*/
+    font-weight: bold;
+    font-size: large;
+    border-radius: 15px;
+    background-color: #f5b145;
+    border: 3px #414141 outset; /*Añadimos borde a todos los botones, añadiendo 6px mas al ancho total*/
+    margin: 0 3.04%; /*Colocamos un margen a cada lado del boton, en cada lado seria 17px, añade 34px al ancho total*/
+}
+input[type="submit"]:hover, input[type="button"]:hover
+{
+    background-color: #624a23; /*Aplicamos un cambio visual para dar mas estilo a la pagina*/
+    color: #ec9e21;
+    border: 3px #414141 inset;
+}
+section p
+{
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+    margin-bottom: 1em; /* Separamos el margen inferior para que no se pegue al borde*/
+}
+
