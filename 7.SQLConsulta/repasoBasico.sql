@@ -172,14 +172,19 @@ CONCAT(string,string,string) --CONCATENA
 --CUENTA LO QUE LE PIDAS, COUNT()
 SELECT COUNT(*) AS 'Cantidad Empleados'
 FROM employee; 
+--CUENTA LOS COUNT DIFERENTES
+SELECT COUNT(DISTINCT, IdDpto) --TOTAL DE DEPARTAMENTOS CON ALGUN EMPLEADO
+FROM Empleados
+
+SELECT COUNT(IdDpto) --TOTAL DE EMPLEADO DE LOS DEPARTAMENTOS
+FROM Empleados
+
 --MAX toma el mayor de la columna, MIN toma el menor de la columna
 SELECT COUNT(*) AS 'Cantidad de account', MAX(avail_balance) AS 'balance maximo', MIN(avail_balance) AS 'balance minimo'
 FROM account;
 --AVG da la media de la columna, SUM da la suma de la columna
 SELECT COUNT(*) AS 'Cantidad de account', MAX(avail_balance) AS 'balance maximo', MIN(avail_balance) AS 'balance minimo', AVG(avail_balance) AS 'balance media', SUM(avail_balance) AS 'suma de balance'
 FROM account;
-
-
 
 --CONSULTAS DE AGRUPACIONES, PARA HACER UN DISTINT COMO EN SLEECT PERO PARA FUNCIONES AGREGADAS USAREMOS GROUP BY
 -- NO TIENE SENTIDO USAR EL GROUP BY Y PEDIR ALGO INDIVIDUAL COMO UN TITULO, NOMBRE, APELLIDO..
@@ -188,7 +193,7 @@ FROM account;
 -- CONTAMOS CUANTOS ACCOUNT HAY EN UNA DETERMINADA EMPRESA
 SELECT COUNT(account_id), open_branch_id, AVG(open_date)
 FROM account
-GROUP BY open_branch_id;
+GROUP BY open_branch_id; -- PUEDE AGRUPAR MAS DE UNA VEZ COMO anio,mes , primero agrupa por año y despues por mes
 
 -- LO FILTRAMOS POR LOS ACCOUNT MAYORES DE PRINCIPIOS DE 2002
 SELECT COUNT(account_id), open_branch_id, AVG(open_date)
@@ -217,6 +222,7 @@ AND p.date_retired IS NOT NULL;
 
 -- TENEMOS VARIOS JOIN 
 -- INNER JOIN[TIENE TODOS RELACIONADOS SI QUEDA ALGUNO SIN COMPARATIVA NO LO MUESTRA]
+-- CUANDO HACES UN INNER JOIN DEBES TENER CUIDADO CON LA AMBIGÜEDAD
 SELECT p.name, t.name, p.product_type_cd
 FROM product p INNER JOIN product_type t
 ON p.product_type_cd = t.product_type_cd;
@@ -240,13 +246,52 @@ SELECT p.name, t.name, p.product_type_cd
 FROM product p FULL JOIN product_type t
 ON p.product_type_cd = t.product_type_cd
 WHERE p.date_retired IS NOT NULL; --MAS ESTRUCTURADO
--- CROSS JOIN, CRUZA LOS VALORES DE COLUMNAS ENTRE SI
+-- CROSS JOIN, CRUZA LOS VALORES DE COLUMNAS ENTRE SI, ES DECIR SI EN UNA TABLA TIENE 10 FILAS Y EN OTRA TENEMOS 5, SACARA 50 FILAS
+-- ES COMO USAR UNA CONSULTA MULTI-TABLA SIN INNER
 SELECT p.name, t.name, p.product_type_cd
 FROM product p CROSS JOIN product_type t;
+-- SE SUELE USAR CON UNA TABLA SIN RELACION DE UNA TABLA CON SOLO UNA FILA, ASI SI PARA TODAS LAS FILAS SIEMPRE VAS A TENER QUE COLOCAR ESE DATO NO HACE FALTA QUE LA PONGAS
+SELECT name,precioD,precioC
+FROM inscripcion CROSS JOIN datos;
+-- Devuelve todas las filas inscripciones junto al campo precio de la tabla datos
+
+-- PRUEBAS
+-- SACA LAS CONSULTAS QUE COINCIDAD EL ID DEL CUST
+SELECT name AS 'Nombre Empresa', address AS Direccion, city AS Ciudad
+FROM customer c INNER JOIN business b
+ON c.cust_id = b.cust_id;
+--SACA TODAS LAS FILAS DE BUSINESS Y LAS QUE JUNTO A ESAS COINCIDAN
+SELECT name AS 'Nombre Empresa', address AS Direccion, city AS Ciudad
+FROM customer c RIGHT JOIN business b
+ON c.cust_id = b.cust_id;
+-- SACA TODAS LAS FILAS DE CUSTOMER, COINCIDAN O NO CON BUSINESS, SI NO LO HACE SE COLOCARA NULL
+SELECT name AS 'Nombre Empresa', address AS Direccion, city AS Ciudad
+FROM customer c LEFT JOIN business b
+ON c.cust_id = b.cust_id;
+
+--INNER JOIN DE 3 TABLAS, USO EL LEFT PARA QUE SIEMPRE TENGA TODAS LAS FILAS DE CUSTOMER, ASI VERE LAS FILAS QUE NO TENGAN NOMBRE DE INDIVIDUAL Y LAS QUE NO TENGAN NOMBRE DE EMPRESA
+SELECT CONCAT(fname,' ',lname) AS 'Nombre Indicual', name AS 'Nombre Empresa', address AS Direccion, city AS Ciudad
+FROM customer c LEFT JOIN individual i
+ON c.cust_id = i.cust_id
+LEFT JOIN business b
+ON c.cust_id = b.cust_id
 
 -- CONSULTAS REFLEXIVAS
 -- Trata de usar una misma tabla para hacer un JOIN, por ejemplo si tenemos una tabla empleado que cuenta con un campo jefe y un campo id_empleado, puede darse el caso que un empleado sea jefe de alguien y asu vez empleado de alguien
 -- Para eso usaremos un AS para cada tabla, aunque sea la misma tabla, asi se duplicara y podremos copararlas entre si.
+SELECT e.emp_id ID, CONCAT(e.fname,' ',e.lname) AS nombreEmpleado, CONCAT(s.fname,' ',s.lname) AS nombreSuperior, e.title AS tituloEmpleado
+FROM employee e LEFT JOIN employee s 
+ON s.emp_id = e.superior_emp_id -- TOMA A TODOS LOS EMPLEADOS, Y SI EL ID DEL EMPLEADO COINCIDE CON EL ID DEL SUPERIOR COLOCA EL NOMBRE DEL SUPERIOR
+ORDER BY e.emp_id;
 
 -- CONSULTAS CON SU MISMA TABLA
 -- Simplemente, se usa un AS diferente para cada tabla, cuando le aplicas el AS estas copiando esta tabla.
+SELECT e.emp_id ID, CONCAT(e.fname,' ',e.lname) AS nombreEmpleado, CONCAT(s.fname,' ',s.lname) AS nombreSuperior, e.title AS tituloEmpleado
+FROM employee e LEFT JOIN employee s 
+ON s.emp_id = e.superior_emp_id -- TOMA A TODOS LOS EMPLEADOS, Y SI EL ID DEL EMPLEADO COINCIDE CON EL ID DEL SUPERIOR COLOCA EL NOMBRE DEL SUPERIOR
+ORDER BY e.emp_id;
+
+SELECT e.emp_id ID, CONCAT(e.fname,' ',e.lname) AS nombreEmpleado, CONCAT(s.fname,' ',s.lname) AS nombreSuperior, e.title AS tituloEmpleado
+FROM employee e INNER JOIN employee s 
+ON s.emp_id = e.superior_emp_id --  SI EL ID DEL EMPLEADO COINCIDE CON EL ID DEL SUPERIOR COLOCA EL NOMBRE DEL SUPERIOR, PONDRA LAS QUE LO TENGA, SI NO TIENE VALOR NOO LO CALACARA
+ORDER BY e.emp_id;
