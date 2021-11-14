@@ -295,3 +295,36 @@ SELECT e.emp_id ID, CONCAT(e.fname,' ',e.lname) AS nombreEmpleado, CONCAT(s.fnam
 FROM employee e INNER JOIN employee s 
 ON s.emp_id = e.superior_emp_id --  SI EL ID DEL EMPLEADO COINCIDE CON EL ID DEL SUPERIOR COLOCA EL NOMBRE DEL SUPERIOR, PONDRA LAS QUE LO TENGA, SI NO TIENE VALOR NOO LO CALACARA
 ORDER BY e.emp_id;
+
+--PRUEBAS DE GROUP BY/ CONSULTAS AGREGADAS
+SELECT idVideojuego,COUNT(idJugador) AS Cantidad_Jugadores, AVG(puntuacion) AS Media_Puntuacion
+FROM Puntuacion 
+GROUP BY idVideojuego;
+
+SELECT name Nombre_Juego,COUNT(idJugador) AS Cantidad_Jugadores, AVG(puntuacion) AS Media_Puntuacion
+FROM Puntuacion p INNER JOIN Videojuego v
+ON p.idVideojuego = v.idVideojuego
+GROUP BY idVideojuego;
+
+SELECT name Nombre_Juego,COUNT(idJugador) AS Cantidad_Jugadores, AVG(puntuacion) AS Media_Puntuacion
+FROM Puntuacion p INNER JOIN Videojuego v
+ON p.idVideojuego = v.idVideojuego
+GROUP BY idVideojuego
+ORDER BY Media_Puntuacion
+LIMIT 5;--Limita a los 5 primeros del select
+
+SELECT name Nombre_Juego,COUNT(idJugador) AS Cantidad_Jugadores, AVG(puntuacion) AS Media_Puntuacion
+FROM Puntuacion p INNER JOIN Videojuego v
+ON p.idVideojuego = v.idVideojuego
+GROUP BY idVideojuego
+HAVING AVG(puntuacion) --FILTRA SIEMPRE CON CONSULTAS AGREGADAS
+ORDER BY Media_Puntuacion
+LIMIT 5;--Limita a los 5 primeros del select
+
+SELECT name Nombre_Juego,COUNT(idJugador) AS Cantidad_Jugadores, AVG(puntuacion) AS Media_Puntuacion
+FROM Puntuacion p INNER JOIN Videojuego v
+ON p.idVideojuego = v.idVideojuego
+WHERE j.categoria = 'miedo';
+GROUP BY idVideojuego
+HAVING AVG(puntuacion) --FILTRA SIEMPRE CON CONSULTAS AGREGADAS
+ORDER BY Media_Puntuacion
