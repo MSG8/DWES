@@ -179,3 +179,48 @@ GROUP BY idArticulo;
 SELECT idPedidos Articulo, SUM(Cantidad)  'Cantidad de productos' 
 FROM Articulos_Pedidos 
 GROUP BY idPedidos;
+
+--DIME EL NOMBRE DEL PRODUCTO  DE LOS PRODUCTOS PEDIDOS Y ADEMAS SU PRECIO DE COMPRA Y ACTUAL. TAMBIEN DEBEMOS VER SU ID DE PEDIDO Y ORDENARLO POR ESTE
+SELECT ap.idPedidos, a.nombre, ap.cantidad, a.precio 'Precio actual', ap.precioCompra  'Precio de compra'
+FROM Articulos a INNER JOIN Articulos_Pedidos ap 
+ON a.idArticulo = ap.idArticulo
+ORDER BY idpedidos;
+
+-- DIME EL IDENTIFICADOR DEL COMPRADOR DE CADA PEDIDO, ADEMAS ORDENALO POR EL ID DE LOS PEDIDOS
+SELECT ap.idPedidos, idComprador
+FROM Pedidos p INNER JOIN Articulos_Pedidos ap 
+ON p.idPedidos = ap.idPedidos
+ORDER BY p.idPedidos;
+
+-- SACAME EL ID PEDIDOS, EL ID DEL COMPRADOR Y EL NOMBRE DEL COMPRADOR, ADEMAS ORDENALO POR ID DE LOS PEDIDOS
+SELECT p.idPedidos, p.idComprador, c.nombre
+FROM Pedidos p INNER JOIN Comprador c 
+ON p.idComprador = c.idComprador
+ORDER BY p.idPedidos;
+
+-- SACAME EL ID DEL PEDIDO, EL NOMBRE DEL ARTICULO, LA CANTIDAD DEL ARTICULO, EL PRECIO DE COMPRA, EL PRECIO ACTUAL Y EL NOMBRE DEL COMPRADOR PARA TODOS LOS PEDIDOS. ADEMAS ORDENALO POR ID DLE PEDIDO
+-- SACA SOLAS LAS QUE SU PRECIO EN EL MOMENTO DE LA COMPRA SON MAYOR A30 Y SEA MAS 1 ARTICULO DEL MISMO PRODUCTO
+SELECT p.idPedidos 'Numero de pedido', c.nombre 'Nombre comprador',a.nombre 'Nombre articulo', ap.cantidad 'Cantidad', a.precio 'Precio actual', ap.precioCompra  'Precio de compra'
+FROM Articulos a INNER JOIN Articulos_Pedidos ap 
+ON a.idArticulo = ap.idArticulo
+INNER JOIN Pedidos p
+ON ap.idPedidos = p.idPedidos
+INNER JOIN Comprador c
+ON p.idComprador = c.idComprador
+WHERE ap.precioCompra > 30 AND ap.cantidad > 1
+ORDER BY p.idPedidos;
+
+-- SACA EL ID DEL PEDIDO, LA MEDIA DEL PREIO DE COMPRA ACTUAL, LA MEDIA DEL PRECIO DE COMPRA EN EL MOMENTO DE LA COMPRA, LA FECHA DE COMPRA Y EL NOMBRE DEL COMPRADOR DE CADA PEDIDO
+-- ADEMAS DEBEN SER PEDIDO QUE PIDAN ARTICULOS MAS CAROS DE 30 EUROS Y QUE LA CANTIDAD DE ESE PRODUCTO SEA MAYOR A 1
+-- Y SOLO MOSTARA LAS FILAS QUE SU MEDIA DE PRECIO ACTUAL Y SU MEDIA DE PRECIO EN EL MOMENTO DE LA COMPRA NO SEA IGUAL
+SELECT p.idPedidos 'Numero de pedido',  AVG(a.precio * ap.cantidad) 'Media del precio de compra actual', AVG(ap.cantidad * ap.precioCompra) 'Media del precio de compra', p.fecha 'Fecha de compra', c.nombre 'Nombre comprador'
+FROM Articulos a INNER JOIN Articulos_Pedidos ap 
+ON a.idArticulo = ap.idArticulo
+INNER JOIN Pedidos p
+ON ap.idPedidos = p.idPedidos
+INNER JOIN Comprador c
+ON p.idComprador = c.idComprador
+WHERE ap.precioCompra > 30 AND ap.cantidad >1
+GROUP BY p.idPedidos
+HAVING AVG(a.precio * ap.cantidad) <> AVG(ap.cantidad * ap.precioCompra)
+ORDER BY p.idPedidos;
