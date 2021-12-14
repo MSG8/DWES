@@ -328,3 +328,41 @@ WHERE j.categoria = 'miedo';
 GROUP BY idVideojuego
 HAVING AVG(puntuacion) --FILTRA SIEMPRE CON CONSULTAS AGREGADAS
 ORDER BY Media_Puntuacion
+
+--SUBCONSULTAS
+-- La subconsulta soslo devuelve una COLUMNa con una o mas filas
+--
+
+SELECT numpartida
+FROM partida
+WHERE puntuacion = (SELECT MIN(puntuacion) FROM partidas);
+
+INSERT INTO Customers (CustomerName, City, Country)
+SELECT SupplierName, City, Country FROM Suppliers;
+
+-- La subconsulta puede usar la tabla llamada de la consulta, aqui usamos el id en el momemnto de update para meter datos diferente cada id
+UPDATE pedidos
+SET BI = (SELECT (importe*precio) FROM lineas_pedido AS lp WHERE lp.idpedido = pedidos.idpedido);
+
+-- IN
+-- Tiene en cuenta varias filas
+WHERE c1 IN (SELECT);
+
+--ANY
+-- >ANY <ANY
+-- SI es mayor o menor  a cada una de las filas
+WHERE c1 >ANY (SELECT);
+
+--ALL
+-- >ALL <ALL
+-- Si es mayor o menor a todas las filas
+
+WHERE c1 >ALL (SELECT);
+
+-- EXISTS
+-- Devuelve true si se crea alguna fila en la subconsulta
+-- Para saber cuantos videos se han visualizados
+
+SELECT idVideo
+FROM Videojuego v
+WHERE EXISTS (SELECT * FROM VISUALIZACION vs WHERE v.IdVideo = vs.IdVideo);
